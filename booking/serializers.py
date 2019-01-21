@@ -14,6 +14,11 @@ CORS_HEADERS = {'Access-Control-Allow-Origin': '*',
 class PNRTicketSerializer(serializers.Serializer):
     pnr = serializers.CharField(required=False, max_length=250)
 
+    def get(self):
+        return DBquery(""" SELECT *
+                                    FROM
+                                        railway_reservation.booked_ticket  WHERE pnr = {pnr}""".format(pnr='"'+self.validated_data['pnr']+'"')).as_dicts()
+
 class ReservationSerializer(serializers.Serializer):
     pnr = serializers.CharField(required=False, max_length=250)
 
@@ -24,6 +29,7 @@ class ReservationSerializer(serializers.Serializer):
         return result
 
 class PrintBookedTicketSerializer(serializers.Serializer):
+    pnr = serializers.CharField(required=False, max_length=250)
     def get(self):
         return DBquery(""" SELECT *
                                     FROM

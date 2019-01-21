@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'cancel/(?P<pk>\d+)/$', views.CancelTicket.as_view(), name="cancel"),
     url(r'printbookedticket/$', views.PrintBookedTicket.as_view(), name="print_booked_ticket"),
     url(r'printavailableticket/$', views.PrintAvailableTicket.as_view(), name="print_available_ticket"),
-    url(r'pnr_tickets/(?P<pk>\d+)/$', views.SearchPNRTickets.as_view(), name="pnr_tickets")
+    url(r'search_by_pnr_ticket/(?P<pk>.*)/$', views.SearchPNRTickets.as_view(), name="search_by_pnr_ticket")
 ]
 
 

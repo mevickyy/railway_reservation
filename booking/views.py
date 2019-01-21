@@ -63,7 +63,7 @@ class CancelTicket(APIView):
         serializer = CancelTicketSerializer(data = {"id": pk})
         if serializer.is_valid():
             serializer.update()
-            return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
+            return Response({"msg:Success"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class PrintBookedTicket(APIView):
@@ -75,7 +75,6 @@ class PrintBookedTicket(APIView):
             headers=CORS_HEADERS)
 
     def get(self, request):
-        # import ipdb;ipdb.set_trace()
         serializer = PrintBookedTicketSerializer(data = request.GET)
         if serializer.is_valid():
             result = serializer.get()
@@ -99,17 +98,19 @@ class PrintAvailableTicket(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST, headers=CORS_HEADERS)
 
 class SearchPNRTickets(APIView):
+
     def options(self, request, *args, **kwargs):
         return Response({"msg": "ok"}, status=200,
             headers=CORS_HEADERS)
 
-    def get(self, request):
-        import ipdb;ipdb.set_trace()
-        # BookingTicketSerializer.objects.filter(pnr=)
-        # serializer = PNRTicketSerializer(data = request.GET)
-        # if serializer.is_valid():
-        #     result = serializer.get()
-        #     return Response(result, status=status.HTTP_201_CREATED, headers=CORS_HEADERS)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST, headers=CORS_HEADERS)
+    def get(self, request, pk):
+        pnrResults = BookedTicket.objects.filter(pnr=pk)
+        if pnrResults:
+            serializer = PNRTicketSerializer(data = {"pnr":pk})
+            if serializer.is_valid():
+                result = serializer.get()
+                return Response({"error":False, "data":result}, status=status.HTTP_201_CREATED, headers=CORS_HEADERS)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST, headers=CORS_HEADERS)
+        return Response({"error":True, "msg":"no results found"}, status=status.HTTP_400_BAD_REQUEST, headers=CORS_HEADERS)
 
     
