@@ -42,11 +42,21 @@ class PrintAvailableTicketSerializer(serializers.Serializer):
     def get(self):
         seats = {}
         for coach in self.coaches:
-            result = DBquery(""" SELECT COUNT(*) AS seat_count
-                                        FROM
-                                            railway_reservation.booked_ticket
-                                        WHERE coach = {coach} AND status = "CNF" or status = "WL" or status= "RAC" """.format(coach='"'+coach+'"')).as_list()[0]
-            seats.update({coach: 9 - result}) 
+            result = DBquery(""" SELECT 
+                                    sum(status = 'RAC') RACcount,
+                                    sum(status = 'CNF') CNFcount
+                                    FROM railway_reservation.booked_ticket WHERE coach = {coach}"""
+                                .format(coach='"'+coach+'"')).as_dict()
+            if result['RACcount'] is not None:
+                totalRAC = result['RACcount']
+            else:
+                totalRAC = 0        
+            if result['CNFcount'] is not None:
+                totalCNF = result['CNFcount']
+            else:
+                totalCNF = 0
+            total = totalCNF + totalRAC
+            seats.update({coach: 9 - total}) 
         return seats
 
 class CancelTicketSerializer(serializers.Serializer):
@@ -146,12 +156,13 @@ class BookingTicketSerializer(serializers.Serializer):
     def validate(self, data):
         cleaned_data = super(BookingTicketSerializer, self).validate(data)
         if self.ticketStatus(status="WL") == 5:
-            raise serializers.ValidationError({"error":"All Tickets are Filled."})
+            raise serializers.ValidationError({"error":"All Tickets are Filled. Cannot Book Anymore."})
         return cleaned_data
 
     def create(self, validated_data):
         coach_number = ""
         status = ""
+        berth = ""
         max_seat_count = 7
         seat_no = 7
         status_coach = False        
@@ -179,7 +190,7 @@ class BookingTicketSerializer(serializers.Serializer):
                     if status_coach is True:
                         break
                 else:    
-                    if self.ticketStatus(status="CNF") >= 28:
+                    if self.ticketStatus(status="CNF") >= 28:   
                         availableSeatRAC = self.checkSeatsCount(compart, status="RAC")
                         if availableSeatRAC < 2:
                             status = "RAC"
@@ -206,7 +217,7 @@ class BookingTicketSerializer(serializers.Serializer):
             # raise serializers.ValidationError('No Tickets to book')
 
     def moveToWaitingList(self, status):
-        data = {"seat_no": 0, "status": "",}
+        data = {"seat_no": 0, "status": "", "berth": "", "coach_number": ""}
         if self.ticketStatus(status) < 5:
             data.update({
                 "status": status,

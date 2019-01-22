@@ -26,9 +26,8 @@ class BookTicket(APIView):
         if serializer.is_valid():
             serializer.save()
             self.updateReservation(pnr)
-            return Response(serializer.validated_data, status=status.HTTP_201_CREATED, headers=CORS_HEADERS)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST,
-            headers=CORS_HEADERS)
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=CORS_HEADERS)
+        return Response(serializer.errors, status=400, headers=CORS_HEADERS)
 
     def options(self, request, *args, **kwargs):
         return Response({"msg": "ok"}, status=200,
@@ -63,8 +62,8 @@ class CancelTicket(APIView):
         serializer = CancelTicketSerializer(data = {"id": pk})
         if serializer.is_valid():
             serializer.update()
-            return Response({"msg:Success"}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"msg":"Cancelled Successfully", "error":False}, status=status.HTTP_201_CREATED, headers=CORS_HEADERS)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST, headers=CORS_HEADERS)
 
 class PrintBookedTicket(APIView):
     """
@@ -110,7 +109,6 @@ class SearchPNRTickets(APIView):
             if serializer.is_valid():
                 result = serializer.get()
                 return Response({"error":False, "data":result}, status=status.HTTP_201_CREATED, headers=CORS_HEADERS)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST, headers=CORS_HEADERS)
-        return Response({"error":True, "msg":"no results found"}, status=status.HTTP_400_BAD_REQUEST, headers=CORS_HEADERS)
+        return Response({"error":True, "msg":"No Records Found"}, headers=CORS_HEADERS)
 
     

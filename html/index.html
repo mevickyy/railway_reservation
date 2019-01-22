@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Train Ticket management System </title>
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="#">
+    <meta name="keywords" content="Train Ticket management System">
+    <meta name="author" content="#">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="assets/bower_components/bootstrap/css/bootstrap.min.css">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/pcoded-horizontal.min.css">
+</head>
+<!-- Menu horizontal fixed layout -->
+
+<body>
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+    <div class="ball-scale">
+        <div class='contain'>
+            <div class="loader-default"><div class="frame"></div></div>
+            <div class="loader-default"><div class="frame"></div></div>
+            <div class="loader-default"><div class="frame"></div></div>
+            <div class="loader-default"><div class="frame"></div></div>
+            <div class="loader-default"><div class="frame"></div></div>
+            <div class="loader-default"><div class="frame"></div></div>
+            <div class="loader-default"><div class="frame"></div></div>
+            <div class="loader-default"><div class="frame"></div></div>
+            <div class="loader-default"><div class="frame"></div></div>
+            <div class="loader-default"><div class="frame"></div></div>
+        </div>
+    </div>
+</div>
+    <!-- Pre-loader end -->
+
+    <div id="pcoded" class="pcoded">
+
+        <div class="pcoded-container">
+            <!-- Menu header start -->
+            <nav class="navbar header-navbar pcoded-header">
+                <div class="navbar-wrapper">
+
+                    <div class="navbar-logo">
+                        <a class="mobile-menu" id="mobile-collapse" href="#!">
+                            <i class="ti-menu"></i>
+                        </a>
+                        <a class="mobile-search morphsearch-search" href="#">
+                            <i class="ti-search"></i>
+                        </a>
+                        <a href="index.html">
+                            <img class="img-fluid" src="assets/images/logo.png" height="60" width="100" alt="Theme-Logo" />
+                        </a>
+                        <a class="mobile-options">
+                            <i class="ti-more"></i>
+                        </a>
+                    </div>
+                    <div style="float: left; font-size: 30px">RAILWAY</div>
+                    <img  id="midpic" src="assets/images/thumbnail.gif" style="margin-left: 148px; float: left">
+                    <div style="float: right; font-size: 30px; margin-right:200px;">RESERVATION</div>
+                    
+                </div>
+            </nav>
+            <!-- Menu header end -->
+            <div class="pcoded-main-container">
+                <nav class="pcoded-navbar">
+                    <div class="pcoded-inner-navbar">
+                        <ul class="pcoded-item pcoded-left-item">
+                            <li class="pcoded-hasmenu">
+                                <a href="index.html">
+                                    <span class="pcoded-micon"><i class="ti-view-list-alt"></i></span>
+                                    <span class="pcoded-mtext">Home</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                            <li class="pcoded-hasmenu">
+                                <a href="print_booked_tickets.html">
+                                    <span class="pcoded-micon"><i class="ti-view-list-alt"></i></span>
+                                    <span class="pcoded-mtext">Booking List</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                
+                <!-- Sidebar inner chat end-->
+                <div class="pcoded-wrapper">
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body m-t-20">
+                                <div class="page-wrapper">
+                                    <!-- Page body start -->
+                                    <div class="page-body">
+                                        <div class="row">
+                                            <!-- card1 start -->
+                                            <div class="col-md-6 col-xl-3">
+                                                <div class="card widget-card-1">
+                                                    <div class="card-block-small">
+                                                        <i class="icofont icofont-pie-chart bg-c-blue card1-icon"></i>
+                                                        <span class="text-c-blue f-w-600">Available Tickets</span>
+                                                        <h4><span id="availableTickets">0</span>/36</h4>
+                                                        <div>
+                                                            <span class="f-left m-t-10 text-muted">
+                                                                <i class="text-c-blue f-16 icofont icofont-warning m-r-10"></i>Filling Fast
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- card1 end -->
+                                            <!-- card1 start -->
+                                            <div class="col-md-6 col-xl-3">
+                                                <div class="card widget-card-1">
+                                                    <div class="card-block-small">
+                                                        <i class="icofont icofont-ui-home bg-c-pink card1-icon"></i>
+                                                        <span class="text-c-pink f-w-600">Booked Tickets</span>
+                                                        <h4><span id="bookedTickets"></span></h4>
+                                                        <div>
+                                                            <span class="f-left m-t-10 text-muted">
+                                                                <i class="text-c-pink f-16 icofont icofont-calendar m-r-10"></i>Last 24 hours
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- card1 end -->
+                                            <!-- card1 start -->
+                                            <div class="col-md-6 col-xl-3">
+                                                <div class="card widget-card-1">
+                                                    <div class="card-block-small">
+                                                        <i class="icofont icofont-warning-alt bg-c-green card1-icon"></i>
+                                                        <span class="text-c-green f-w-600">Total Coach</span>
+                                                        <h4>4</h4>
+                                                        <div>
+                                                            <span class="f-left m-t-10 text-muted">
+                                                                <i class="text-c-green f-16 icofont icofont-tag m-r-10"></i>Tracked from railway
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- card1 end -->
+                                            <!-- card1 start -->
+                                            <div class="col-md-6 col-xl-3">
+                                                <div class="card widget-card-1">
+                                                    <div class="card-block-small">
+                                                        <i class="icofont icofont-social-twitter bg-c-yellow card1-icon"></i>
+                                                        <span class="text-c-yellow f-w-600">Followers</span>
+                                                        <h4>+562</h4>
+                                                        <div>
+                                                            <span class="f-left m-t-10 text-muted">
+                                                                <i class="text-c-yellow f-16 icofont icofont-refresh m-r-10"></i>Just update
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- card1 end -->
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Railway Reservation</h5>
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <span><a href="booking.html" class="btn btn-out-dashed btn-primary btn-square">Book Ticket</a></span> &nbsp; &nbsp;
+                                                        <span><a href="cancel.html" class="btn btn-out-dashed btn-primary btn-square">Cancel Ticket</a></span> &nbsp; &nbsp;
+                                                        <span><a href="print_booked_tickets.html" class="btn btn-out-dashed btn-primary btn-square">Print Booked Tickets</a></span>
+                                                        &nbsp; &nbsp;
+                                                        <span><a href="print_available.html" class="btn btn-out-dashed btn-primary btn-square">Print Available Tickets</a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Page body end -->
+                                </div>
+                            </div>
+                            <!-- Main-body end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Warning Section Ends -->
+    <!-- Required Jquery -->
+    <script type="text/javascript" src="assets/bower_components/jquery/js/jquery_new.min.js"></script>
+     <script src="assets/js/jquery.czMore-1.5.3.2.js"></script>
+
+    <script type="text/javascript" src="assets/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="assets/bower_components/popper.js/js/popper.min.js"></script>
+    <script type="text/javascript" src="assets/bower_components/bootstrap/js/bootstrap.min.js"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="assets/bower_components/jquery-slimscroll/js/jquery.slimscroll.js"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="assets/bower_components/modernizr/js/modernizr.js"></script>
+    <script type="text/javascript" src="assets/bower_components/modernizr/js/css-scrollbars.js"></script>
+
+    <!-- i18next.min.js -->
+    <script type="text/javascript" src="assets/bower_components/i18next/js/i18next.min.js"></script>
+    <script type="text/javascript" src="assets/bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js"></script>
+    <script type="text/javascript" src="assets/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js"></script>
+    <script type="text/javascript" src="assets/bower_components/jquery-i18next/js/jquery-i18next.min.js"></script>
+    <!-- Custom js -->
+
+    <script src="assets/js/pcoded.min.js"></script>
+    <script src="assets/js/menu/menu-hori-fixed.js"></script>
+    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.ajax({
+              url: "http://127.0.0.1:8000/train/printbookedticket/",
+              method: "GET", 
+              dataType: 'json',
+              contentType: "application/json",
+              processData: false,
+            }).success(function(response) { 
+               // $('#bookticketDivID').hide();
+               if(response.length > 0){
+                    var data = response.length;
+               } else {
+                    var data = 0;
+               }
+               $('#bookedTickets').text(data);
+            }).error(function(XHR, textStatus) { 
+                  console.log('error' + textStatus);
+            });
+
+            $.ajax({
+              url: "http://127.0.0.1:8000/train/printavailableticket/",
+              method: "GET", 
+              dataType: 'json',
+              contentType: "application/json",
+              processData: false,
+            }).success(function(response) { 
+                $('#availableTickets').html(printAvailableTickets(response));
+            }).error(function(XHR, textStatus) { 
+                  console.log('error' + textStatus);
+            });
+        });
+
+printAvailableTickets = function(response){
+   var html = "";
+   var add = 0;
+   $.each(response, function(key, value){
+      add +=value
+   });
+   return add;
+}
+
+    </script>
+</body>
+
+</html>

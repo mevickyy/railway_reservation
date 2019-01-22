@@ -1,0 +1,118 @@
+API URLS
+===============================================
+1. For Ticket Booking
+	Method: POST
+	URL: http://127.0.0.1:8000/train/book/
+	
+	Request Params: [{
+        "name": "vicky",
+        "age": "45",
+        "gender": "male",
+        "berth_preference": "SUB"
+        
+    }]
+   
+    Response data: 
+    [{
+        "id": 1,
+        "name": "vicky",
+        "age": 45,
+        "gender": "male",
+        "berth_preference": "SUB",
+        "pnr": "1B61F5",
+        "status": "CNF",
+        "created_date": "2019-01-22T07:03:56.215582Z"
+    }]
+
+	---------------------------
+
+2. For Cancellation
+	URL: http://127.0.0.1:8000/train/cancel/5/
+	Method: PUT
+	Response data:
+	{
+    "msg": "Cancelled Successfully",
+    "error": false
+	}
+
+	---------------------------
+
+3. Search Ticket by PNR
+   Method: GET
+   URL: http://127.0.0.1:8000/train/search_by_pnr_ticket/1B61F5/
+   Response data:
+   {
+    "error": false,
+    "data": [
+        {
+            "created_date": "2019-01-22T07:03:56",
+            "pnr": "1B61F5",
+            "status": "CNC",
+            "id": 1,
+            "seat_no": 1,
+            "berth_preference": "SUB",
+            "name": "vicky",
+            "gender": "male",
+            "coach": "s1",
+            "age": 45
+        },
+        {
+            "created_date": "2019-01-22T07:03:56",
+            "pnr": "1B61F5",
+            "status": "CNF",
+            "id": 2,
+            "seat_no": 2,
+            "berth_preference": "UB",
+            "name": "vickyraju",
+            "gender": "female",
+            "coach": "s1",
+            "age": 35
+        }
+    ]
+}
+	---------------------------
+
+4. Print Available Ticket
+   URL: http://127.0.0.1:8000/train/printavailableticket/
+   Method: GET
+   Response data:
+   {
+    "s3": 9,
+    "s1": 8,
+    "s2": 9,
+    "s4": 9
+	}
+
+	---------------------------
+
+5. Print Available Ticket
+   URL: http://127.0.0.1:8000/train/printbookedticket/
+   Method: GET
+   Response data:
+   [
+    {
+        "created_date": "2019-01-22T07:03:56",
+        "pnr": "1B61F5",
+        "status": "CNC",
+        "id": 1,
+        "seat_no": 1,
+        "berth_preference": "SUB",
+        "name": "vicky",
+        "gender": "male",
+        "coach": "s1",
+        "age": 45
+    },
+    {
+        "created_date": "2019-01-22T07:03:56",
+        "pnr": "1B61F5",
+        "status": "CNF",
+        "id": 2,
+        "seat_no": 2,
+        "berth_preference": "UB",
+        "name": "vickyraju",
+        "gender": "female",
+        "coach": "s1",
+        "age": 35
+    }
+]
+
