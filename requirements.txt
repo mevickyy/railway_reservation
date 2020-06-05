@@ -7,7 +7,7 @@ celery==4.0.2
 certifi==2017.7.27.1
 chardet==3.0.4
 decorator==4.1.2
-Django==1.10.5
+Django==1.11.29
 djangorestframework==3.7.3
 docutils==0.13.1
 enum34==1.1.6
